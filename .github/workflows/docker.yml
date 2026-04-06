@@ -6,7 +6,7 @@ jobs:
   RUNNING:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@main
+      - uses: actions/checkout@dev
       - name: Create Image
         run: docker pull downloadyh/mltb:latest 
       - name: Run Image
