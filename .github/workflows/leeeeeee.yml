@@ -6,9 +6,9 @@ jobs:
   RUNNING:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@main
-      - name: Create Image
-        run: docker push downloadyh/ibot:lee
-        run: docker pull downloadyh/ibot:lee 
-      - name: Run Image
-        run: docker run --env CONFIG_FILE_URL=${{ secrets.CONFIG_FILE_URL }} --env TOKEN_PICKLE_URL=${{ secrets.TOKEN_PICKLE_URL }} downloadyh/ibot:lee 
+      - uses: actions/checkout@v1
+    - name: Build & Push Image
+      run: |
+        echo "${{ secrets.DOCKERPW }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
+        docker image build -t "${{ secrets.DOCKER_HUB_USERNAME }}"/mltb:latest .
+        docker push "${{ secrets.DOCKER_HUB_USERNAME }}"/mltb:latest
