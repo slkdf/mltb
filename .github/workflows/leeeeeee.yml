@@ -2,9 +2,9 @@ name: Build Docker
 
 on:
   push:
-   branches: [ dev ]
+   branches: [ master ]
   pull_request:
-    branches: [ dev ]
+    branches: [ master ]
 
 jobs:
   RUNNING:
@@ -12,6 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@main
       - name: Create Image
-        run: docker pull anonymous/mltb:latest 
+        run: docker pull downloadyh/mltb:v1 
       - name: Run Image
-        run: docker run --env CONFIG_FILE_URL=${{ secrets.CONFIG_FILE_URL }} --env TOKEN_PICKLE_URL=${{ secrets.TOKEN_PICKLE_URL }} anonymous/mltb:latest 
+        run: docker run --env CONFIG_FILE_URL=${{ secrets.CONFIG_FILE_URL }} --env TOKEN_PICKLE_URL=${{ secrets.TOKEN_PICKLE_URL }} downloadyh/mltb:v1 
