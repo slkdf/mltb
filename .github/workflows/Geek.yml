@@ -1,4 +1,4 @@
-name: MLTB
+name: Maloe
 
 on:
   workflow_dispatch:
