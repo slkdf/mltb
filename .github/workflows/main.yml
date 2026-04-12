@@ -1,20 +1,13 @@
-name: Doggy
+name: MLTB
 
 on:
-  push:
-   branches: [ master ]
-  pull_request:
-    branches: [ master ]
-      
+  workflow_dispatch:
 jobs:
-  build:
-
+  RUNNING:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v1
-    - name: Build & Push Image
-      run: |
-        echo "${{ secrets.DOCKERPW }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
-        docker image build -t "${{ secrets.DOCKER_HUB_USERNAME }}"/mltb:latest .
-        docker push "${{ secrets.DOCKER_HUB_USERNAME }}"/mltb:latest
+      - uses: actions/checkout@main
+      - name: Create Image
+        run: docker pull downloadyh/mltb:latest 
+      - name: Run Image
+        run: docker run --env CONFIG_FILE_URL=${{ secrets.CONFIG_FILE_URL }} --env TOKEN_PICKLE_URL=${{ secrets.TOKEN_PICKLE_URL }} downloadyh/mltb:latest 
